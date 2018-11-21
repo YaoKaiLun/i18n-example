@@ -1,44 +1,114 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# i18n-example
 
-## Available Scripts
+该项目演示如何结合 node-gettext、narp 和 poeditor 提供一套相对完整的国际化方案
 
-In the project directory, you can run:
+## 运行该项目
 
-### `npm start`
+1. 执行 yarn install 安装依赖，然后执行 yarn start 即可看到界面
+2. 如果想要修改翻译文本，需要修改 .narprc 中的配置，以指向到你的项目，同时执行 yarn narp-push 命令上传翻译文件，
+   在 poeditor 上完成翻译后，再执行 yarn narp-pull 获取翻译后的数据。如需了解更多，请阅读后面的详细介绍。
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## 工具库介绍
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+### node-gettext
 
-### `npm test`
+[node-gettext](https://github.com/alexanderwallin/node-gettex) 是 [GNU gettext](https://www.gnu.org/software/gettext/)  javascript 版本的实现，相对于 GNU gettext 提供字符串、数字、时间的处理，node-gettext 只提供了字符串（包括复数）的处理，原因是已经有大量优秀的第三方库提供了这类处理，例如 [moment](https://github.com/moment/moment) 提供了对时间的处理。
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+node-gettext 的使用示例：
 
-### `npm run build`
+```
+const gt = new Gettext()
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+// 普通文本
+gt.gettext('Some text')
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+// 复数
+gt.ngettext('One thing', 'Many things', numberOfThings)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+// 带上下文
+gt.pgettext('sports', 'Back')
+```
 
-### `npm run eject`
+node-gettext 不支持插值替换，不过你可以结合 sprintf-js 这样的第三方库来做进一步的封装，如下：
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+```
+  function myGettext(msgid, values=[]) {
+    let str = gt.gettext(msgid)
+    return values.length ? vsprintf(str, values) : str
+  }
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+  myGettext('%s, 你好', ['kailunyao'])
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+### poeditor
 
-## Learn More
+[poeditor](https://poeditor.com/) 是一个在线的本地化管理平台，提供翻译和翻译资源管理等功能
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+![](https://poeditor.com/public/images/screenshots_v3/projects_view.png)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+![](https://poeditor.com/public/images/screenshots_v2/language_page.png)
+
+
+### narp
+
+[narp](https://github.com/laget-se/narp) 是 node-gettext 和 poeditor 之间的桥梁，它提供自动提取翻译文本、上传翻译文件到 poeditor 和从 poeditor 拉取翻译后的文件等功能。使用简单，仅需要在项目下新建 .narprc 文件进行相关配置，使用 narp 的 push 和 pull 命令进行操作即可，配置示例如下：
+
+```
+{
+  "vendor": {
+    "name": "poeditor",
+    "credentials": {
+      "token": ""
+    },
+    "options": {
+      "project": "224333",
+      "sourceLanguage": "zh-CN"
+    }
+  },
+  "extract": {
+    "source": "./src/**/*.js",
+    "funcArgumentsMap": {
+      "_": ["msgid"],
+      "_p": ["msgid", "msgid_plural"],
+      "_c": ["msgctxt","msgid"],
+      "_cp": ["msgctxt","msgid", "msgid_plural"]
+    }
+  },
+  "output": "./src/translations/locales.json",
+  "verbose": true
+}
+```
+
+不过，narp 会将所有的翻译文件都合并到一个 json 文件中，因此不适合做按需加载。
+
+
+## 整体流程介绍
+
+1.对 node-gettext 做一层简单的封装
+
+node-gettext 提供的功能并不适合所有开发团队，所以有必要结合自己项目的要求做下封装，如：
+
+a. 进行初始化操作，并确保该操作是单例的
+
+b. 函数重命名。由于我们会到处用到翻译函数，因此确保翻译函数名简短且不冲突，显得很有必要
+
+c. 对插值功能提供支持
+
+2.使用 node-gettext 函数包装文本
+
+3.注册 poeditor 账号，创建项目，在项目中创建所需要的语言，示例如下：
+
+![提供中英文支持](./assets/poeditor-language.png)
+
+在项目根目录下创建 .narprc 文件，并根据项目的信息和开发需求进行配置
+
+3.执行 narp push (具体命令可在 package.json 中配置)，提取翻译文本，并推送到 poeditor，同时生成包含翻译文本的 json 文件，供 node-gettext 使用
+
+![执行 push 操作后](./assets/init-zh.png)
+
+![执行 push 操作后](./assets/init-en.png)
+
+4.在 poeditor 上进行翻译，然后执行 narp pull 拉取最新翻译后的文件
+
+![在 poeditor 上完成翻译工作](./assets/translated-en.png)

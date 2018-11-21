@@ -1,0 +1,151 @@
+{
+  "zh-CN": {
+    "charset": "utf-8",
+    "headers": {
+      "mime-version": "1.0",
+      "content-type": "text/plain; charset=UTF-8",
+      "content-transfer-encoding": "8bit",
+      "x-generator": "POEditor.com",
+      "project-id-version": "init-example",
+      "language": "zh-CN",
+      "plural-forms": "nplurals=1; plural=0;"
+    },
+    "translations": {
+      "": {
+        "": {
+          "msgid": "",
+          "msgstr": [
+            "MIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nX-Generator: POEditor.com\nProject-Id-Version: init-example\nLanguage: zh-CN\nPlural-Forms: nplurals=1; plural=0;\n"
+          ]
+        },
+        "你好世界！": {
+          "msgid": "你好世界！",
+          "comments": {
+            "reference": "./src/App.js:12"
+          },
+          "msgstr": [
+            ""
+          ]
+        },
+        "%s，你好": {
+          "msgid": "%s，你好",
+          "comments": {
+            "reference": "./src/App.js:16"
+          },
+          "msgstr": [
+            ""
+          ]
+        },
+        "1 次": {
+          "msgid": "1 次",
+          "comments": {
+            "reference": "./src/App.js:25\n./src/App.js:26"
+          },
+          "msgid_plural": "%d 次",
+          "msgstr": [
+            ""
+          ]
+        }
+      },
+      "表示颜色": {
+        "黄色": {
+          "msgid": "黄色",
+          "msgctxt": "表示颜色",
+          "comments": {
+            "reference": "./src/App.js:20"
+          },
+          "msgstr": [
+            ""
+          ]
+        }
+      },
+      "表示色情": {
+        "黄色": {
+          "msgid": "黄色",
+          "msgctxt": "表示色情",
+          "comments": {
+            "reference": "./src/App.js:21"
+          },
+          "msgstr": [
+            ""
+          ]
+        }
+      }
+    }
+  },
+  "en": {
+    "charset": "utf-8",
+    "headers": {
+      "mime-version": "1.0",
+      "content-type": "text/plain; charset=UTF-8",
+      "content-transfer-encoding": "8bit",
+      "x-generator": "POEditor.com",
+      "project-id-version": "init-example",
+      "language": "en",
+      "plural-forms": "nplurals=2; plural=(n != 1);"
+    },
+    "translations": {
+      "": {
+        "": {
+          "msgid": "",
+          "msgstr": [
+            "MIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nX-Generator: POEditor.com\nProject-Id-Version: init-example\nLanguage: en\nPlural-Forms: nplurals=2; plural=(n != 1);\n"
+          ]
+        },
+        "你好世界！": {
+          "msgid": "你好世界！",
+          "comments": {
+            "reference": "./src/App.js:12"
+          },
+          "msgstr": [
+            "Hello World!"
+          ]
+        },
+        "%s，你好": {
+          "msgid": "%s，你好",
+          "comments": {
+            "reference": "./src/App.js:16"
+          },
+          "msgstr": [
+            "%s, hello"
+          ]
+        },
+        "1 次": {
+          "msgid": "1 次",
+          "comments": {
+            "reference": "./src/App.js:25\n./src/App.js:26"
+          },
+          "msgid_plural": "%d 次",
+          "msgstr": [
+            "one time",
+            "%d times"
+          ]
+        }
+      },
+      "表示颜色": {
+        "黄色": {
+          "msgid": "黄色",
+          "msgctxt": "表示颜色",
+          "comments": {
+            "reference": "./src/App.js:20"
+          },
+          "msgstr": [
+            "yellow"
+          ]
+        }
+      },
+      "表示色情": {
+        "黄色": {
+          "msgid": "黄色",
+          "msgctxt": "表示色情",
+          "comments": {
+            "reference": "./src/App.js:21"
+          },
+          "msgstr": [
+            "pornographic"
+          ]
+        }
+      }
+    }
+  }
+}

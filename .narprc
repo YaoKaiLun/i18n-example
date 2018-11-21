@@ -1,0 +1,23 @@
+{
+  "vendor": {
+    "name": "poeditor",
+    "credentials": {
+      "token": ""
+    },
+    "options": {
+      "project": "224333",
+      "sourceLanguage": "zh-CN"
+    }
+  },
+  "extract": {
+    "source": "./src/**/*.js",
+    "funcArgumentsMap": {
+      "_": ["msgid"],
+      "_p": ["msgid", "msgid_plural"],
+      "_c": ["msgctxt","msgid"],
+      "_cp": ["msgctxt","msgid", "msgid_plural"]
+    }
+  },
+  "output": "./src/translations/locales.json",
+  "verbose": true
+}

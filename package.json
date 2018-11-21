@@ -1,17 +1,21 @@
 {
-  "name": "intl-example",
+  "name": "i18n-example",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "node-gettext": "^2.0.0",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
-    "react-scripts": "2.1.1"
+    "react-scripts": "2.1.1",
+    "sprintf-js": "^1.1.1"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "narp-push": "narp push",
+    "narp-pull": "narp pull"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -21,5 +25,8 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "narp": "^3.2.1"
+  }
 }
