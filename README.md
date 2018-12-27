@@ -54,7 +54,7 @@ node-gettext 不支持插值替换，不过你可以结合 sprintf-js 这样的�
 
 ### narp
 
-[narp](https://github.com/laget-se/narp) 是 node-gettext 和 poeditor 之间的桥梁，它提供自动提取翻译文本、上传翻译文件到 poeditor 和从 poeditor 拉取翻译后的文件等功能。使用简单，仅需要在项目下新建 .narprc 文件进行相关配置，使用 narp 的 push 和 pull 命令进行操作即可，配置示例如下：
+[narp](https://github.com/laget-se/narp) 是 node-gettext 和 poeditor 之间的桥梁，它提供自动提取翻译文本、上传翻译文件到 poeditor 和从 poeditor 拉取翻译后的文件等功能。使用简单，仅需要在项目下新建 .narprc 文件进行相关配置，使用 narp 的 push 和 pull 命令进行操作即可，配置示例如下：
 
 ```
 {
