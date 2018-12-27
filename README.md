@@ -1,6 +1,7 @@
 # i18n-example
 
 该项目演示如何结合 node-gettext、narp 和 poeditor 提供一套相对完整的国际化方案
+相关文章：[前端国际化方案选择](https://www.jianshu.com/p/47dab3691d70)
 
 ## 运行该项目
 
